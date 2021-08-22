@@ -1,2 +1,2 @@
 # mpowerpy
-FastAPI interface for connecting to and controlling Ubiquiti's MPower MFi devices.
+Controller for Ubiquiti MFi MPower switches in Python

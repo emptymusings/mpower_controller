@@ -1,0 +1,8 @@
+{ 
+    "settings": {
+        "database": {
+            "type": "jsondb", 
+            "path": "c:\\Dev\\python\\mpowerpy\\mpower\\infrastructure\\database.json"
+        }
+    }
+}
