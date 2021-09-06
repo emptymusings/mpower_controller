@@ -97,3 +97,15 @@ export async function setRelayState(host: string, port: number, new_state: numbe
 
     return new Error('Error changing relay');
 }
+
+export function getRelayDetails(host: string, port: number): Promise<Relay | undefined> {
+    return getDeviceDetails(host)
+        .then((result) => {
+            const d = result as Device;
+            if (d.relays){
+                return d.relays.find(r => r.port === port);
+            };
+
+            return undefined;
+        });
+}

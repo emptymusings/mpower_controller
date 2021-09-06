@@ -3,7 +3,7 @@ import { Relay } from '../dto/relay';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Switch, CircularProgress } from '@material-ui/core';
 import { yellow } from '@material-ui/core/colors';
-import { setRelayState } from '../services/device.service';
+import { getRelayDetails, setRelayState } from '../services/device.service';
 
 export interface Props {
     host: string;
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     progress: {
-        marginLeft: theme.spacing(5),
+        marginLeft: theme.spacing(7),
         marginRight: theme.spacing(2)
     }
 }));
@@ -61,20 +61,33 @@ export default function RelayDisplay(props: Props): JSX.Element {
 
     function sendPowerChangeToService() {
         if (relay?.port) {
-            setRelayState(props.host, relay.port, (isPowerOn ? 0 : 1))
-                .then((result) => {                    
-                    setRelay(result as Relay);           
+            const r = setRelayState(props.host, relay.port, (isPowerOn ? 0 : 1))
+                .then((result) => {  
                     if (result) {
                         setIsPowerOn((result as Relay).relay === 1);
                         setIsPowerChanging(false);
                     }
+                    
+                    return result as Relay;
                 })
+                .then((r) => {
+                    getRelayDetails(props.host, r.port)
+                    .then((relayResult) => {
+                        setRelay(relayResult as Relay)
+                    });
+                });
         }
     }
 
     function updateSwitch() {
         if (isLoading === true) {
-            setSwitchElement(<CircularProgress variant="indeterminate" className={classes.progress} />);
+            setSwitchElement(
+                <CircularProgress 
+                    variant="indeterminate" 
+                    className={classes.progress} 
+                    size={35}
+                />
+            );
         } else {
             setSwitchElement(<Switch
                 checked={isPowerOn}
