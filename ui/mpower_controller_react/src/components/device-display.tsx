@@ -16,10 +16,14 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         flexGrow: 1,
         margin: theme.spacing(1),
-        padding: theme.spacing(2)
+        padding: theme.spacing(2),
+        borderRadius: '2',
+        border: '2px solid',
+        borderColor: 'darkblue',
+        backgroundColor: 'lightblue'
     },
     host: {
-        textAlign: 'left'
+        textAlign: 'right'
     }
 }));
 
@@ -87,8 +91,8 @@ export default function DeviceDisplay(props: Props): JSX.Element {
                         item
                         xs={6}
                         sm={6}
-                        md={1}
-                        lg={1}
+                        md={6}
+                        lg={6}
                     >
                         <Typography variant="h5">
                             {props.device ? props.device.name : 'Not Set'}

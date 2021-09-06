@@ -66,7 +66,9 @@ export default function Home() {
                         item
                         xs={12}
                         sm={12}
-                        md={12}
+                        md={4}
+                        lg={3}
+                        xl={3}
                     >
                         <DeviceDisplay device={item} />
                     </Grid>
