@@ -70,7 +70,7 @@ export default function Home() {
                         lg={3}
                         xl={3}
                     >
-                        <DeviceDisplay device={item} />
+                        <DeviceDisplay key={item.host} device={item} />
                     </Grid>
                 ));
             } else {

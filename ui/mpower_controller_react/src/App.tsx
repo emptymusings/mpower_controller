@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/header';
 import Home from './components/home';
-import { Container, createMuiTheme, CssBaseline } from '@material-ui/core';
+import { Container, createTheme, CssBaseline } from '@material-ui/core';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: '#005173'

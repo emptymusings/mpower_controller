@@ -1,9 +1,10 @@
-import { Grid, InputLabel, Paper, Typography, CircularProgress } from '@material-ui/core';
+import { Grid, Paper, Typography, CircularProgress } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import { Device } from '../dto/device';
 import { makeStyles } from '@material-ui/core/styles';
 import { getDeviceDetails } from '../services/device.service';
 import { Relay } from '../dto/relay';
+import RelayDisplay from './relay-display';
 
 export interface Props {
     device?: Device;
@@ -51,10 +52,8 @@ export default function DeviceDisplay(props: Props): JSX.Element {
             if (deviceDetails) {
                 if (deviceDetails.relays.length > 0) {
                     return deviceDetails.relays.map((item: Relay) => (
-                        <Grid container item>
-                            <Grid item>
-                                {item.label}
-                            </Grid>
+                        <Grid key={item.port} container item xs={12} sm={12} md={12} lg={12} xl={12}>
+                            <RelayDisplay host={deviceDetails.host} relay={item} />
                         </Grid>
                     ))
                 } else {
@@ -110,8 +109,8 @@ export default function DeviceDisplay(props: Props): JSX.Element {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid container item xs={12} sm={12} md={12} lg={12} xl={12} alignContent="flex-end">
-                    <Grid item alignItems="flex-end">
+                <Grid container item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Grid item>
                         {displayRelays()}
                     </Grid>
                 </Grid>                    

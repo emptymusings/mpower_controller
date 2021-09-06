@@ -1,5 +1,5 @@
 export interface Relay {
-    name: string;
+    port: number;
     label: string;
     output: number;
     power: number;
