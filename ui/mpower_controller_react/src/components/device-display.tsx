@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { getDeviceDetails } from '../services/device.service';
 import { Relay } from '../dto/relay';
 import RelayDisplay from './relay-display';
+import Divider from '@material-ui/core/Divider';
 
 export interface Props {
     device?: Device;
@@ -15,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
         width: '90%'
     },
     paper: {
-        flexGrow: 1,
         margin: theme.spacing(1),
         padding: theme.spacing(2),
         borderRadius: '2',
@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     },
     host: {
         textAlign: 'right'
+    },
+    relay: {
+        marginBottom: theme.spacing(1)
     }
 }));
 
@@ -51,9 +54,12 @@ export default function DeviceDisplay(props: Props): JSX.Element {
         if (initialized) {
             if (deviceDetails) {
                 if (deviceDetails.relays.length > 0) {
-                    return deviceDetails.relays.map((item: Relay) => (
+                    return deviceDetails.relays.map((item: Relay) => (                        
                         <Grid key={item.port} container item xs={12} sm={12} md={12} lg={12} xl={12}>
-                            <RelayDisplay host={deviceDetails.host} relay={item} />
+                            <div className={classes.relay}>
+                                <RelayDisplay host={deviceDetails.host} relay={item} />
+                                <Divider />
+                            </div>
                         </Grid>
                     ))
                 } else {
@@ -109,9 +115,12 @@ export default function DeviceDisplay(props: Props): JSX.Element {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid container item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <Grid container item xs={12} sm={12} md={12} lg={12} xl={12}>                    
                     <Grid item>
-                        {displayRelays()}
+                        <div>
+                            <Divider className={classes.relay} />
+                            {displayRelays()}
+                        </div>
                     </Grid>
                 </Grid>                    
             </Paper>

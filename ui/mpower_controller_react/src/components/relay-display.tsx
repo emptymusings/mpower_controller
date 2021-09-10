@@ -13,7 +13,8 @@ export interface Props {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1
+        flexGrow: 1,
+        marginBottom: theme.spacing(2)
     },
     details: {
         alignItems: 'center'
@@ -31,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     progress: {
         marginLeft: theme.spacing(7),
         marginRight: theme.spacing(2)
+    },
+    divider: {
+        color: 'white'
     }
 }));
 
@@ -42,6 +46,7 @@ export default function RelayDisplay(props: Props): JSX.Element {
     const [isPowerChanging, setIsPowerChanging] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [switchElement, setSwitchElement] = useState(<div></div>);
+    const [lastUpdated, setLastUpdated] = useState(new Date());
 
     if (props.relay &&
         props.relay.relay < 10 &&
@@ -49,53 +54,6 @@ export default function RelayDisplay(props: Props): JSX.Element {
         setRelay(props.relay);
         setIsPowerOn(true);
         setInitialized(true);
-    }
-
-    function handlePowerChange(event: React.ChangeEvent) {
-        if (props.handlePowerChange) {
-            props.handlePowerChange();
-        } else {
-            setIsPowerChanging(true);
-        }
-    }
-
-    function sendPowerChangeToService() {
-        if (relay?.port) {
-            const r = setRelayState(props.host, relay.port, (isPowerOn ? 0 : 1))
-                .then((result) => {  
-                    if (result) {
-                        setIsPowerOn((result as Relay).relay === 1);
-                        setIsPowerChanging(false);
-                    }
-                    
-                    return result as Relay;
-                })
-                .then((r) => {
-                    getRelayDetails(props.host, r.port)
-                    .then((relayResult) => {
-                        setRelay(relayResult as Relay)
-                    });
-                });
-        }
-    }
-
-    function updateSwitch() {
-        if (isLoading === true) {
-            setSwitchElement(
-                <CircularProgress 
-                    variant="indeterminate" 
-                    className={classes.progress} 
-                    size={35}
-                />
-            );
-        } else {
-            setSwitchElement(<Switch
-                checked={isPowerOn}
-                onChange={handlePowerChange}
-                className={classes.powerSwitch}
-                color='primary'
-            />);
-        }
     }
 
     function displayRelaySummary() {
@@ -151,23 +109,86 @@ export default function RelayDisplay(props: Props): JSX.Element {
         }
     }
     
+    useEffect(() => {
+        const newDate = new Date();
+
+        if (lastUpdated !== newDate) {
+            getRelayDetails(props.host, (relay?.port ?? 0))
+                .then((result) => {
+                    setRelay(result as Relay);
+                });
+
+            setTimeout(() => setLastUpdated(new Date()), 30000);
+        }
+    }, [lastUpdated, props, relay])
     
-    useEffect(() => {        
+    useEffect(() => {     
+        function sendPowerChangeToService() {
+            if (relay?.port) {
+                setRelayState(props.host, relay.port, (isPowerOn ? 0 : 1))
+                    .then((result) => {  
+                        if (result) {
+                            setIsPowerOn((result as Relay).relay === 1);
+                            setIsPowerChanging(false);
+                        }
+                        
+                        return result as Relay;
+                    })
+                    .then((r) => {
+                        getRelayDetails(props.host, r.port)
+                        .then((relayResult) => {
+                            setRelay(relayResult as Relay)
+                        });
+                    });
+            }
+        }
+
         if (isPowerChanging === true) {
             setIsLoading(true);
             sendPowerChangeToService();
         } else {
             setIsLoading(false);
         }
-    }, [isPowerChanging]);
+    }, [isPowerChanging, props, isPowerOn, relay]);
 
-    useEffect(() => {
+    useEffect(() => {        
+        function handlePowerChange(event: React.ChangeEvent) {
+            if (props.handlePowerChange) {
+                props.handlePowerChange();
+            } else {
+                setIsPowerChanging(true);
+            }
+        }
+
+        function updateSwitch() {
+            if (isLoading === true) {
+                setSwitchElement(
+                    <CircularProgress 
+                        variant="indeterminate" 
+                        className={classes.progress} 
+                        size={35}
+                    />
+                );
+            } else {
+                setSwitchElement(<Switch
+                    checked={isPowerOn}
+                    onChange={handlePowerChange}
+                    className={classes.powerSwitch}
+                    color='primary'
+                />);
+            }
+        }
         updateSwitch();
-    }, [isLoading]);
+    }, [isLoading, classes, props, isPowerOn]);
 
     return (
-        <Grid container item>
-            {displayRelaySummary()}
-        </Grid>
+       <Grid container item xs={12} sm={12} md={12} lg={12} xl={12}>
+            <Grid container item>
+                {displayRelaySummary()}            
+            </Grid>
+            <Grid container item>
+                <small>Last updated: {lastUpdated.toLocaleString()}</small>
+            </Grid>        
+       </Grid>
     )
 }
