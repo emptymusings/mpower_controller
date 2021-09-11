@@ -33,7 +33,7 @@ export async function getDeviceList(): Promise<Device[] | Error> {
 
 export async function getDeviceDetails(host: string): Promise<Device | Error> {
     try {
-        const result = await fetch(`${api_path}${host}`)
+        const result = await fetch(`${api_path}/${host}`)
             .then((response) => {
                 if (!response.ok) {
                     return new Error(`Error to load device: ${host}`);
@@ -64,7 +64,7 @@ export async function setRelayState(host: string, port: number, new_state: numbe
             }
         }
 
-        const result = await fetch(`${api_path}commands/${host}/${port}/${new_state}`, options)
+        const result = await fetch(`${api_path}/commands/${host}/${port}/${new_state}`, options)
             .then((response) => {
                 if (!response.ok) {
                     return new Error('Failed to change Relay: Invalid response from server');
