@@ -18,8 +18,18 @@ export default function Home() {
     const classes = useStyles();
     const [deviceList, setDeviceList] = useState<Device[] | undefined>([]);
     const [initialized, setInitialized] = useState(false);
+    const [toastSuccessOpen, setToastSuccessOpen] = useState(false);
     const [toastErrorMessage, setToastErrorMessage] = useState(<div>Operation Failed!</div>);
     const [toastErrorOpen, setToastErrorOpen] = useState(false);
+    const [showLoading, setShowLoading] = useState(true);
+
+    function handleToastSuccessClose(event?: SyntheticEvent, reason?: string) {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setToastSuccessOpen(false);
+    }
 
     function handleToastErrorClose(event?: SyntheticEvent, reason?: string) {
         if (reason === 'clickaway') {
@@ -85,6 +95,12 @@ export default function Home() {
             getDeviceListFromService();
         }
     });
+
+    useEffect(() => {        
+        if (deviceList !== undefined) {
+            setShowLoading(false);
+        }
+    }, [deviceList]);
 
     return (
         <Grid container className={classes.root} item xs={12} md={12} lg={12} xl={12}>
