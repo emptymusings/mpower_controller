@@ -16,8 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home() {
     const classes = useStyles();
-    const [deviceList, setDeviceList] = useState<Device[] | undefined>([]);
-    const [initialized, setInitialized] = useState(false);
+    const [deviceList, setDeviceList] = useState<Device[] | undefined>(undefined);
     const [toastErrorMessage, setToastErrorMessage] = useState(<div>Operation Failed!</div>);
     const [toastErrorOpen, setToastErrorOpen] = useState(false);
 
@@ -34,7 +33,6 @@ export default function Home() {
             getDeviceList()
                 .then((results) => {
                     setDeviceList(results as Device[]);
-                    setInitialized(true); 
                 })
                 .catch((error) => {
                     setToastErrorMessage(<div>{error}</div>);
@@ -47,7 +45,7 @@ export default function Home() {
     }
 
     function displayDevices() {
-        if (deviceList !== undefined && initialized) {            
+        if (deviceList !== undefined) {            
             if (deviceList.length > 0) {
                 return deviceList.map((item: Device) => (
                     <Grid
@@ -79,12 +77,9 @@ export default function Home() {
             </div>
         )
     }
-
     useEffect(() => {
-        if (!initialized) {
-            getDeviceListFromService();
-        }
-    });
+        getDeviceListFromService();
+    }, [])
 
     return (
         <Grid container className={classes.root} item xs={12} md={12} lg={12} xl={12}>
