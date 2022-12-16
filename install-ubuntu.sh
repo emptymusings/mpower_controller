@@ -51,7 +51,7 @@ echo "Generating new executable"
 touch $EXEC_NAME
 echo "#!/bin/bash" >> $EXEC_NAME
 echo "" >> $EXEC_NAME
-echo "sudo docker run -p ${http_port}:8000 -v ${config_path}:/etc/mpowerpy --rm --name mpowerpy-api mpowerpy-api" >> $EXEC_NAME
+echo "docker run -p ${http_port}:8000 -v ${config_path}:/etc/mpowerpy --rm --name mpowerpy-api mpowerpy-api" >> $EXEC_NAME
 echo "" >> $EXEC_NAME
 chmod 755 $EXEC_NAME
 

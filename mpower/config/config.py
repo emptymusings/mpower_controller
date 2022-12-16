@@ -5,6 +5,8 @@ from mpower.infrastructure import storage
 from mpower.infrastructure.idb import dbInterface
 from mpower.factories.dbfactory import get_db
 
+#dir = os.path.dirname(__file__)
+#configFile = os.path.join(dir,'configuration.json')
 configFile = storage.get_config_file_path()
 
 class Config():    
@@ -48,3 +50,4 @@ class Config():
             dbType = sbSettings['type']
         
         self.db = get_db(dbType)
+

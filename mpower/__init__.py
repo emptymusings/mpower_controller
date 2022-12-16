@@ -5,4 +5,4 @@ import mpower.exceptions
 import mpower.factories
 import mpower.models
 import mpower.repository
-import mpower.controller_models
+import mpower.views

@@ -14,3 +14,4 @@ def get_device(connection, relay_no = 0):
 
 def change_relay_state(connection, relay_no = 1, new_state = 0):
     return connection.change_relay_state(relay_no, new_state)
+

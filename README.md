@@ -29,3 +29,4 @@ docker run mpowerpy
 
 ### Usage
 FastAPI generates a Swagger file, which can be located by navigating your browser to the hosted location's /docs path (e.g. http://localhost:8000/docs).
+

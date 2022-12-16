@@ -28,3 +28,4 @@ class dbInterface():
     def commit_changes(self):
         """Commits any changes made to the database"""
         pass
+

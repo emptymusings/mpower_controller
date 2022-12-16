@@ -51,3 +51,4 @@ if (__name__ == '__main__'):
     load()    
     update_entry("color", "blue", "green")
     remove_entry("color")
+
