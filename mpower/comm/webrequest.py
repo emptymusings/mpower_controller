@@ -93,3 +93,8 @@ class Requester:
             print("Unexpected error:", sys.exc_info()[0])
             json = {'status': 'failed', 'reason': 'ERROR: Unable to complete request. {}'.format(sys.exc_info()[0])}
             return json            
+
+if __name__ == "__main__":
+    rqr = Requester("192.168.1.217", "ubnt", "ubnt")
+    print(rqr.get_general_info())
+

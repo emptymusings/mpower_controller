@@ -1,17 +1,17 @@
 from fastapi import FastAPI
-from mpower.repository import mfi_repo as repo
-from mpower.controller_models.devices import commands
+from mpower.repository import mfirepo as repo
+from mpower.views.api_views import view
 import json
 
 app = FastAPI()
 
 @app.get("/api/devices")
 async def get_devices():
-   return commands.get_all_devices()
+   return view.get_all_devices()
 
 @app.get("/api/devices/{host}")
 async def get_device(host):
-   return commands.get_device(host)
+   return view.get_device(host)
 
 @app.post("/api/devices")
 async def save_device():
@@ -21,11 +21,11 @@ async def save_device():
 @app.put("/api/devices")
 async def update_device():
    #payload = request.json
-   return commands.add_device({"results": "updated - stub"})
+   return view.add_device({"results": "updated - stub"})
 
 @app.delete("/api/delete/{host}")
 async def delete_device(host):
-   return commands.delete_device(host)
+   return view.delete_device(host)
 
 def run_api():
    app

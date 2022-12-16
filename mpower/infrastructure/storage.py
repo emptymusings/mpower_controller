@@ -23,3 +23,4 @@ def get_config_file_path():
 
 def get_default_devices_file():
     return os.path.join(get_config_dir(), DEVICES_FILE_NAME)
+

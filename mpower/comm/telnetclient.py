@@ -56,3 +56,4 @@ class TelNetter:
             self.get_command()
         else:
             print('Done')            
+

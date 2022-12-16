@@ -14,3 +14,4 @@ class mRelay(BaseModel):
     relay: int
     lock: int
     relay_number: int
+
