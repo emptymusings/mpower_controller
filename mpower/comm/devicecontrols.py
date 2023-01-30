@@ -1,10 +1,4 @@
-from mpower.models import mDevice
-from mpower.models import mRelay
 from .webrequest import Requester
-from .telnetclient import TelNetter
-import getpass
-import json
-import time
 
 def connect_to_device(host, username, password):
     return Requester(host, username, password)

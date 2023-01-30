@@ -1,7 +1,11 @@
 from fastapi import FastAPI
 from mpower.repository import mfirepo as repo
 from mpower.views.api_views import view
-import json
+
+__all__=[
+   'repo',
+   'view'
+]
 
 app = FastAPI()
 

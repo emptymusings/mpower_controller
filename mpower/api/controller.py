@@ -1,10 +1,8 @@
 from fastapi import FastAPI
-from mpower.repository import mfirepo as repo
 from mpower.models.mDevice import mDevice
 from mpower.models.device_relay_state import DeviceRelayState
 from mpower.views.api_views import view
 from fastapi.middleware.cors import CORSMiddleware
-import json
 
 app = FastAPI(
    title="MPower API",

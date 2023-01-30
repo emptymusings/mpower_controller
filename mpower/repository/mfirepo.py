@@ -1,5 +1,4 @@
 from mpower.models.mDevice import mDevice
-from mpower.models.mRelay import mRelay
 from mpower.config import config as cfg
 from mpower.comm import webrequest
 from mpower.infrastructure import storage
@@ -78,4 +77,3 @@ def delete_device(host):
     db.devices.pop(idx)
     db.commit_changes()
     return 'Device with host \'{}\' removed'.format(host)
-

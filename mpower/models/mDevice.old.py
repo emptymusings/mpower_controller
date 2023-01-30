@@ -1,9 +1,7 @@
 from mRelay import mRelay
-import webrequest
-import telnetclient
+from mpower.comm.webrequest import Requester
 import getpass
 import json
-import time
 
 class mDevice:
     cnx = {}
@@ -14,7 +12,7 @@ class mDevice:
         self.host = host
         self.username = username
         self.password = password
-        self.cnx = mpower.comm.webrequest.Requester(host, username, password)
+        self.cnx = Requester(host, username, password)
         self.relays = []
 
         if (autoinitialize):

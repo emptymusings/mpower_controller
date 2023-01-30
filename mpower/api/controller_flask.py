@@ -1,8 +1,5 @@
-#from flask import Flask, request
 from flask import Flask, request
-from ..repository import mfirepo as repo
 from ..views.api import view
-import json
 
 api_app = Flask(__name__)
 

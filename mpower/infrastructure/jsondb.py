@@ -1,9 +1,7 @@
 import os, json
-from mpower.comm import webrequest
 from mpower.infrastructure import storage
 from mpower.infrastructure.idb import dbInterface
 from mpower.models.mDevice import mDevice
-from mpower.exceptions.recordnotfoundexception import RecordNotFoundException
 
 class JsonDb(dbInterface):
     def __init__(self):

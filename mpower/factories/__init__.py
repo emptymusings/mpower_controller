@@ -1,4 +1,7 @@
 from mpower.infrastructure import JsonDb
-import mpower.factories.dbfactory
+from mpower.factories import dbfactory
 
-
+__all__=[
+    'JsonDb',
+    'dbfactory'
+]

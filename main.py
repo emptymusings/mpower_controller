@@ -1,4 +1,3 @@
-import mpower
 import uvicorn
 from mpower.api import controller as c
 
