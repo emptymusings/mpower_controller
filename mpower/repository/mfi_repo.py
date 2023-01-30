@@ -1,5 +1,4 @@
 from mpower.models.mDevice import mDevice
-from mpower.models.mRelay import mRelay
 from mpower.config import config as cfg
 from mpower.comm import webrequest
 from mpower.infrastructure import storage
