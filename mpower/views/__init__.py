@@ -1,2 +1,5 @@
-import mpower.views.api_views.view
+from mpower.views.api_views import view
 
+__all__=[
+    'view'
+]

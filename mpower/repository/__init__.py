@@ -1,3 +1,7 @@
-import mpower.repository.mfirepo
-import mpower.repository.mfirepository
+from mpower.repository import mfirepo
+from mpower.repository import mfirepo, mfirepository
 
+__all__=[
+    'mfirepo',
+    'mfirepository'
+]

@@ -1,9 +1,6 @@
 from mRelay import mRelay
-import webrequest
-import telnetclient
 import getpass
 import json
-import time
 
 class mDevice:
     cnx = {}
