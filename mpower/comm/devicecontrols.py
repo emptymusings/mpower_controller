@@ -1,5 +1,3 @@
-from mpower.models import mDevice
-from mpower.models import mRelay
 from .webrequest import Requester
 from .telnetclient import TelNetter
 import getpass
