@@ -1,7 +1,5 @@
 import sys
 import urllib, urllib.request
-from http import cookies
-import json
 
 class Requester:
     cookie_value = 'AIROS_SESSIONID=01234567890123456789012345678902'
