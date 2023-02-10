@@ -1,5 +1,6 @@
-fastapi[all]==0.65.2
-uvicorn==0.13.3
-pydantic==1.7.4
-wheel==0.38.1
+fastapi[all]==0.90.1
+uvicorn==0.20.0
+pydantic==1.10.4
+wheel==0.38.4
 appdirs==1.4.4
+
