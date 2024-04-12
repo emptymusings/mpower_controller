@@ -1,3 +1,5 @@
+[![Python CI Build and Lint](https://github.com/emptymusings/mpower_controller/actions/workflows/python-ci.yml/badge.svg)](https://github.com/emptymusings/mpower_controller/actions/workflows/python-ci.yml)
+[![Docker Image CI](https://github.com/emptymusings/mpower_controller/actions/workflows/build-docker.yml/badge.svg)](https://github.com/emptymusings/mpower_controller/actions/workflows/build-docker.yml)
 # mpowerpy_controller
 FastAPI service to control and view information about Ubiquiti MFi MPower switches in Python
 
